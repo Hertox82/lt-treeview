@@ -1,0 +1,29 @@
+<ul class="list-tree">
+  <li *ngFor="let item of data">
+      <div class="list-item" *ngIf="item.adding === true">
+          <ul>
+              <li *ngFor="let n of listToAdd"(click)="addNode(n)"><span>{{n.label}}</span></li>
+          </ul>
+      </div>
+      <span class="coll" (click)="expand(item)" *ngIf="item.expand === false; else expanse">
+        <i class="fa fa-caret-right"></i>
+      </span>
+      <ng-template #expanse>
+          <span class="coll" (click)="expand(item)">
+              <i class="fa fa-caret-down"></i>
+          </span>
+      </ng-template>
+      <div class="control">
+          <a>
+              {{item.label}}
+          </a>
+          <button class="plus" (click)="add(item)">
+              <i class="fa fa-plus"></i>
+          </button>
+          <button class="erase" (click)="delete(item)">
+              <i class="fa fa-remove"></i>
+          </button>
+      </div>
+      <lt-treeview-internal [data] = "item.children" [listToAdd]="listToAdd" *ngIf="item.expand === true"></lt-treeview-internal>
+    </li>
+</ul>

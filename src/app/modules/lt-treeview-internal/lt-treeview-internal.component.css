@@ -1,0 +1,75 @@
+
+.coll{
+    padding: 10px;
+    cursor: pointer;
+}
+
+.list-tree{
+    list-style: none;
+    margin-top : 8px;
+}
+
+
+.list-tree li {
+    padding: 15px;
+}
+
+.plus{
+    padding: 7px 15px;
+    border: unset;
+    background-color: orange;
+    color: white;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.erase{
+    padding: 7px 15px;
+    border: unset;
+    background-color: #da3522;
+    color: white;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.list-tree a {
+    text-decoration: none;
+    padding: 10px 15px;
+    color: black;
+    text-transform: capitalize;
+}
+
+.control{
+    display: inline-block;
+    padding: 5px;
+    background-color: #e9e9e9;
+}
+
+.list-item
+{
+    background-color: #9c9c9c;
+    border: 1px solid;
+    width: 250px;
+    z-index: 1000;
+    position: absolute;
+    top: 52px;
+    left: 130px;
+    color: white;
+}
+
+.list-item ul {
+    list-style: none;
+    padding: unset;
+}
+
+.list-item li:nth-child(odd){
+    background-color: darkgray;
+}
+
+.list-item li {
+    text-transform: capitalize;
+    cursor: pointer;
+}
+.list-item li:hover {
+    background-color: #f9cd0e
+}
