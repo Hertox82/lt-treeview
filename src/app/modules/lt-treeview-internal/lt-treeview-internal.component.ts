@@ -10,6 +10,7 @@ export class LtTreeviewInternalComponent implements OnInit {
 
   @Input() data: Node[];
   @Input() listToAdd: NodeAdded[] = [];
+  @Input() show: boolean;
 
   currentNode: Node;
 
@@ -24,23 +25,27 @@ export class LtTreeviewInternalComponent implements OnInit {
   }
 
   add(item: Node) {
-    if (this.currentNode == undefined) {
-      this.currentNode = item;
-      this.currentNode.adding = true;
-    }else if (this.currentNode === item) {
-      this.currentNode = undefined;
-      item.adding = false;
-    }else if (this.currentNode !== item) {
-      this.currentNode = item;
-      this.currentNode.adding = true;
+    if (this.show === true) {
+      if (this.currentNode == undefined) {
+        this.currentNode = item;
+        this.currentNode.adding = true;
+      }else if (this.currentNode === item) {
+        this.currentNode = undefined;
+        item.adding = false;
+      }else if (this.currentNode !== item) {
+        this.currentNode = item;
+        this.currentNode.adding = true;
+      }
     }
   }
-  
+
   delete(item: Node) {
-    if (confirm('Do you really want delete this Node?')) {
-      const index = this.data.indexOf(item);
-      if (index > -1) {
-        this.data.splice(index, 1);
+    if (this.show === true) {
+      if (confirm('Do you really want delete this Node?')) {
+        const index = this.data.indexOf(item);
+        if (index > -1) {
+          this.data.splice(index, 1);
+        }
       }
     }
   }

@@ -25,10 +25,10 @@
                     <i class="fa fa-remove"></i>
                 </button>
             </div>
-            <lt-treeview-internal [data]="item.children" [listToAdd]="listToAdd" *ngIf="item.expand === true"></lt-treeview-internal>
+            <lt-treeview-internal [data]="item.children" [listToAdd]="listToAdd" [show]="show" *ngIf="item.expand === true"></lt-treeview-internal>
       </li>
   </ul>
-  <div class="box-lt-treeview">
+  <div class="box-lt-treeview" *ngIf="show === true">
       <button (click)="addRoot()"><i class="fa fa-plus"></i> Add Root</button>
       <div class="list-root" *ngIf="addRootb === true">
         <ul>
