@@ -1,6 +1,6 @@
 {
   "name": "lt-treeview",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "packagr":"ng-packagr -p ng-package.json"
+    "packagr": "ng-packagr -p ng-package.json"
   },
   "private": true,
   "dependencies": {
