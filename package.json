@@ -2,6 +2,17 @@
   "name": "lt-treeview",
   "version": "1.0.3",
   "license": "MIT",
+  "author": {
+    "name": "Hernan Ariel De Luca",
+    "email": "hadeluca@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hertox82/lt-treeview.git"
+  },
+  "bugs": {
+   "url": "https://github.com/Hertox82/lt-treeview/issues" 
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
