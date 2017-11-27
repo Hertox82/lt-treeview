@@ -1,2 +1,2 @@
-export * from './app/modules/lt-treeview/lt-treeview.module';
-export { Node } from './app/modules/lt-treeview';
+export * from './lt-treeview/lt-treeview.module';
+export { Node } from './lt-treeview';

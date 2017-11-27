@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Node, NodeAdded} from './modules/lt-treeview';
+import {Node, NodeAdded} from '../lt-treeview';
 
 @Component({
   selector: 'app-root',
