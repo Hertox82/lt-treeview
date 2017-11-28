@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Node, NodeAdded, convertAddedToNode } from '../lt-treeview/node';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Node, NodeAdded, convertAddedToNode, ParentChild } from '../lt-treeview/node';
 
 @Component({
   selector: 'lt-treeview-internal',
@@ -11,6 +11,14 @@ export class LtTreeviewInternalComponent implements OnInit {
   @Input() data: Node[];
   @Input() listToAdd: NodeAdded[] = [];
   @Input() show: boolean;
+
+  @Input() callBackOnUpdate: any;
+
+  @Input() callBackOnDelete: any;
+
+  @Output() onUpdate = new EventEmitter<ParentChild>();
+
+  @Output() onDelete = new EventEmitter<ParentChild>();
 
   currentNode: Node;
 
@@ -45,15 +53,30 @@ export class LtTreeviewInternalComponent implements OnInit {
         const index = this.data.indexOf(item);
         if (index > -1) {
           this.data.splice(index, 1);
+          const emitNode = {
+            node : item
+          } as ParentChild;
+          this.onDelete.emit(emitNode);
         }
       }
     }
   }
 
   addNode(item: NodeAdded) {
+    let emitNode = {};
+    let storedNode = {}; 
     this.data.forEach((node) => {
         if (node === this.currentNode) {
-          node.children.push(convertAddedToNode(item));
+          const itemNode = convertAddedToNode(item);
+          emitNode = {
+            parent: node,
+            node: itemNode
+          } as ParentChild;
+          if (this.callBackOnUpdate == undefined) {
+            node.children.push(convertAddedToNode(item));
+          } else {
+            this.onUpdate.emit(emitNode as ParentChild);
+          }
           node.adding = false;
         }
     });

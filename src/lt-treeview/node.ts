@@ -24,3 +24,8 @@ export function convertAddedToNode(item: NodeAdded): Node {
     adding: false,
  } as Node;
 }
+
+export interface ParentChild {
+    parent?: Node;
+    node: Node;
+}
