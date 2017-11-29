@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {Node, NodeAdded, ParentChild} from '../lt-treeview';
+import { Subject } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,10 @@ export class AppComponent {
   title = 'app';
   lista: Node[];
   addedList: NodeAdded[];
+
+  private _soggetto = new Subject();
+  $mario = this._soggetto.asObservable();
+
   constructor() {
     this.lista = [{
       label: 'Padre',
@@ -62,25 +67,21 @@ export class AppComponent {
     console.log(this.lista);
   }
 
-  updateData(arrayList: Node[], data: any): Node[] {
+  updateData(arrayList: Node[], data: any): Promise<Node> {
       // in this case is Added parent Root
-      if ( ! data.hasOwnProperty(data, 'parent')) {
-          // roma merda
+      return new Promise<Node>((resolve, recject) => {
+        setTimeout(() => {
           data.node.obj = {id: lastIdInsert(arrayList)};
-          arrayList.push(data.node);
-      }
-
-      return arrayList;
+          resolve(data.node);
+        }, 10);
+      });
   }
 
-  delete(data) {
-    console.log(data);
-  }
-
-  update(data) {
+  deleteData(data: any) {
     console.log(data);
   }
 }
+
 
 export function lastIdInsert(lista: Node[]): number {
   let id = 0;

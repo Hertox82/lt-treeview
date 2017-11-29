@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { Node, NodeAdded, convertAddedToNode, ParentChild } from '../lt-treeview/node';
 
 @Component({
@@ -11,14 +11,11 @@ export class LtTreeviewInternalComponent implements OnInit {
   @Input() data: Node[];
   @Input() listToAdd: NodeAdded[] = [];
   @Input() show: boolean;
+  @Input() parent = <Node>null;
 
-  @Input() callBackOnUpdate: any;
+  @Input() callBackOnUpdate: Function;
 
-  @Input() callBackOnDelete: any;
-
-  @Output() onUpdate = new EventEmitter<ParentChild>();
-
-  @Output() onDelete = new EventEmitter<ParentChild>();
+  @Input() callBackOnDelete: Function;
 
   currentNode: Node;
 
@@ -48,7 +45,6 @@ export class LtTreeviewInternalComponent implements OnInit {
   }
 
   delete(item: Node) {
-    if (this.show === true) {
       if (confirm('Do you really want delete this Node?')) {
         const index = this.data.indexOf(item);
         if (index > -1) {
@@ -56,31 +52,37 @@ export class LtTreeviewInternalComponent implements OnInit {
           const emitNode = {
             node : item
           } as ParentChild;
-          this.onDelete.emit(emitNode);
+          this.callBackOnDelete(emitNode);
+          if (this.parent.children.length === 0) {
+            this.parent.expand = false;
+          }
         }
       }
-    }
   }
 
   addNode(item: NodeAdded) {
-    let emitNode = {};
-    let storedNode = {}; 
     this.data.forEach((node) => {
-        if (node === this.currentNode) {
-          const itemNode = convertAddedToNode(item);
-          emitNode = {
+      if (node === this.currentNode) {
+        const convertedNode = convertAddedToNode(item);
+        if (this.callBackOnUpdate == undefined) {
+          node.children.push(convertedNode);
+          node.expand = true;
+        } else {
+          const emitNode = {
             parent: node,
-            node: itemNode
+            node: convertedNode
           } as ParentChild;
-          if (this.callBackOnUpdate == undefined) {
-            node.children.push(convertAddedToNode(item));
-          } else {
-            this.onUpdate.emit(emitNode as ParentChild);
-          }
-          node.adding = false;
+          this.callBackOnUpdate(node.children, emitNode).then(
+            (res) => {
+              node.children.push(res);
+              node.expand = true;
+            }
+          );
         }
-    });
-    this.currentNode = undefined;
+        node.adding = false;
+      }
+  });
+  this.currentNode = undefined;
   }
 
 }

@@ -14,13 +14,9 @@ export class LtTreeviewComponent implements OnInit {
 
   @Input() show: boolean;
 
-  @Input() callBackOnUpdate: any;
+  @Input() callBackOnUpdate: Function;
 
-  @Input() callBackOnDelete: any;
-
-  @Output() onUpdate = new EventEmitter<ParentChild>();
-
-  @Output() onDelete = new EventEmitter<ParentChild>();
+  @Input() callBackOnDelete: Function;
 
   currentNode: Node;
   addRootb: boolean;
@@ -63,13 +59,14 @@ export class LtTreeviewComponent implements OnInit {
     const emitNode = {
       node: node
     } as ParentChild;
-    this.onUpdate.emit(emitNode);
     if ( this.callBackOnUpdate != undefined) {
-      this.data = this.callBackOnUpdate(this.data, emitNode);
+     this.callBackOnUpdate(this.data, emitNode)
+      .then((res) => {
+        this.data.push(res);
+      });
     }else {
       this.data.push(node);
     }
-
     // pushing node into dataNode
     this.addRootb = !this.addRootb;
   }
@@ -83,7 +80,7 @@ export class LtTreeviewComponent implements OnInit {
           const emitNode = {
             node : item
           } as ParentChild;
-          this.onDelete.emit(emitNode);
+          this.callBackOnDelete(emitNode);
         }
       }
     }
@@ -92,7 +89,22 @@ export class LtTreeviewComponent implements OnInit {
   addNode(item: NodeAdded) {
     this.data.forEach((node) => {
         if (node === this.currentNode) {
-          node.children.push(convertAddedToNode(item));
+          const convertedNode = convertAddedToNode(item);
+          if (this.callBackOnUpdate == undefined) {
+            node.children.push(convertedNode);
+            node.expand = true;
+          } else {
+            const emitNode = {
+              parent: node,
+              node: convertedNode
+            } as ParentChild;
+            this.callBackOnUpdate(node.children, emitNode).then(
+              (res) => {
+                node.children.push(res);
+                node.expand = true;
+              }
+            );
+          }
           node.adding = false;
         }
     });
