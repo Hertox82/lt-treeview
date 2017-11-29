@@ -25,7 +25,7 @@
                     <i class="fa fa-remove"></i>
                 </button>
             </div>
-            <lt-treeview-internal [data]="item.children" [parent] = "item" [listToAdd]="listToAdd" [show]="show" [callBackOnDelete]="callBackOnDelete" [callBackOnUpdate]="callBackOnUpdate" *ngIf="item.expand === true"></lt-treeview-internal>
+            <lt-treeview-internal [data]="item.children" [parent] = "item" [listToAdd]="listToAdd" [show]="show" [component]="component" [callBackOnDelete]="callBackOnDelete" [callBackOnUpdate]="callBackOnUpdate" *ngIf="item.expand === true"></lt-treeview-internal>
       </li>
   </ul>
   <div class="box-lt-treeview" *ngIf="show === true">

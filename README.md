@@ -41,7 +41,7 @@ after this, you can be able to load the LtTreeviewComponent into your own Compon
 ```typescript
 @Component({
   selector : 'app-your-component',
-  template : '<lt-treeview [data] = "listOfElementToShow" [listToAdd]="addedList" [show]="false" [callBackOnUpdate]="UpdateItem" [callBackOnDelete]="DeleteItem"></lt-treeview>',
+  template : '<lt-treeview [data] = "listOfElementToShow" [listToAdd]="addedList" [show]="false" [component]="self" [callBackOnUpdate]="UpdateItem" [callBackOnDelete]="DeleteItem"></lt-treeview>',
   styles : ['']
 })
 
@@ -52,9 +52,11 @@ after this, you can be able to load the LtTreeviewComponent into your own Compon
 
 `show` is a boolean that if is false you cannot add/erase data into the treeview.
 
-`callBackOnUpdate` is function with you can pass a Promise<Node>
+`callBackOnUpdate` is function with you can pass a Promise<Node>, if you pass a component you can also type a name of function with string
 
-`callBackOnDelete` is function for callback when item is deleted
+`callBackOnDelete` is function for callback when item is deleted, if you pass a component you can also type a name of function with string
+
+`component` you can pass the itself in order to bind it into the callback and read the property inside the function 
 
 ## Example
 
@@ -64,10 +66,17 @@ Into the library you can find a little app that emulate the beahaviour of Treevi
 ## Example callBackOnUpdate
 
 ```typescript
-updateData(arrayList: Node[], data: any): Promise<Node> {
+
+/**
+ *Inside the Component
+ */
+
+let self = this;
+
+updateData(data: any): Promise<Node> {
       return new Promise<Node>((resolve, recject) => {
         setTimeout(() => {
-          data.node.obj = {id: lastIdInsert(arrayList)};
+          data.node.obj = {id: lastIdInsert(this.arrayList)};
           resolve(data.node);
         }, 10);
       });

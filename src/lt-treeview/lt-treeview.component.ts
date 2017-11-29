@@ -14,9 +14,11 @@ export class LtTreeviewComponent implements OnInit {
 
   @Input() show: boolean;
 
-  @Input() callBackOnUpdate: Function;
+  @Input() callBackOnUpdate: any;
 
-  @Input() callBackOnDelete: Function;
+  @Input() callBackOnDelete: any;
+
+  @Input() component: any;
 
   currentNode: Node;
   addRootb: boolean;
@@ -28,12 +30,19 @@ export class LtTreeviewComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * This function collapse the item in treeview
+   * @param item
+   */
   expand(item: Node) {
     if (item.children.length > 0) {
       item.expand = !item.expand;
     }
   }
-
+/**
+ * This function call The AddNode function
+ * @param item
+ */
   add(item: Node) {
     if (this.show === true) {
       if (this.currentNode == undefined) {
@@ -60,10 +69,27 @@ export class LtTreeviewComponent implements OnInit {
       node: node
     } as ParentChild;
     if ( this.callBackOnUpdate != undefined) {
-     this.callBackOnUpdate(this.data, emitNode)
-      .then((res) => {
-        this.data.push(res);
-      });
+        if (this.component == undefined) {
+        this.callBackOnUpdate(this.data, emitNode)
+          .then((res) => {
+            this.data.push(res);
+          });
+      } else {
+        if (this.callBackOnUpdate && typeof this.callBackOnUpdate == 'function') {
+            const method = this.callBackOnUpdate.bind(this.component);
+            method(emitNode).then(
+              (res) => {
+                this.data.push(res);
+              }
+            );
+        } else {
+        this.component[this.callBackOnUpdate](emitNode).then(
+            (res) => {
+              this.data.push(res);
+            }
+          );
+        }
+      }
     }else {
       this.data.push(node);
     }
@@ -81,7 +107,16 @@ export class LtTreeviewComponent implements OnInit {
             node : item
           } as ParentChild;
           if (this.callBackOnDelete != undefined) {
-            this.callBackOnDelete(emitNode);
+            if (this.component == undefined) {
+              this.callBackOnDelete(emitNode);
+            } else {
+                if (this.callBackOnDelete && typeof this.callBackOnDelete == 'function') {
+                  const method = this.callBackOnDelete.bind(this.component);
+                  method(emitNode);
+                } else {
+                  this.component[this.callBackOnDelete](emitNode);
+                }
+            }
           }
         }
       }
@@ -100,12 +135,32 @@ export class LtTreeviewComponent implements OnInit {
               parent: node,
               node: convertedNode
             } as ParentChild;
-            this.callBackOnUpdate(node.children, emitNode).then(
-              (res) => {
-                node.children.push(res);
-                node.expand = true;
-              }
-            );
+            if (this.component == undefined) {
+              this.callBackOnUpdate(emitNode).then(
+                (res) => {
+                  node.children.push(res);
+                  node.expand = true;
+                }
+              );
+            } else {
+                if (typeof this.callBackOnUpdate == 'function') {
+                  const method = this.callBackOnUpdate.bind(this.component);
+
+                  method(emitNode).then(
+                    (res) => {
+                      node.children.push(res);
+                      node.expand = true;
+                    }
+                  );
+                } else {
+                  this.component[this.callBackOnUpdate](node.children, emitNode).then(
+                    (res) => {
+                      node.children.push(res);
+                      node.expand = true;
+                    }
+                  );
+                }
+            }
           }
           node.adding = false;
         }

@@ -15,6 +15,7 @@ export class AppComponent {
   private _soggetto = new Subject();
   $mario = this._soggetto.asObservable();
 
+  self = this;
   constructor() {
     this.lista = [{
       label: 'Padre',
@@ -67,11 +68,11 @@ export class AppComponent {
     console.log(this.lista);
   }
 
-  updateData(arrayList: Node[], data: any): Promise<Node> {
+  public updateData(data: any): Promise<Node> {
       // in this case is Added parent Root
       return new Promise<Node>((resolve, recject) => {
         setTimeout(() => {
-          data.node.obj = {id: lastIdInsert(arrayList)};
+          data.node.obj = {id: lastIdInsert(this.lista)};
           resolve(data.node);
         }, 10);
       });
