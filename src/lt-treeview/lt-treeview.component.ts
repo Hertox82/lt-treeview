@@ -80,7 +80,9 @@ export class LtTreeviewComponent implements OnInit {
           const emitNode = {
             node : item
           } as ParentChild;
-          this.callBackOnDelete(emitNode);
+          if (this.callBackOnDelete != undefined) {
+            this.callBackOnDelete(emitNode);
+          }
         }
       }
     }
