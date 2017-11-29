@@ -41,7 +41,7 @@ after this, you can be able to load the LtTreeviewComponent into your own Compon
 ```typescript
 @Component({
   selector : 'app-your-component',
-  template : '<lt-treeview [data] = "listOfElementToShow" [listToAdd]="addedList" [show]="false"></lt-treeview>',
+  template : '<lt-treeview [data] = "listOfElementToShow" [listToAdd]="addedList" [show]="false" [callBackOnUpdate]="UpdateItem" [callBackOnDelete]="DeleteItem"></lt-treeview>',
   styles : ['']
 })
 
@@ -52,10 +52,28 @@ after this, you can be able to load the LtTreeviewComponent into your own Compon
 
 `show` is a boolean that if is false you cannot add/erase data into the treeview.
 
+`callBackOnUpdate` is function with you can pass a Promise<Node>
+
+`callBackOnDelete` is function for callback when item is deleted
+
 ## Example
 
 Into the library you can find a little app that emulate the beahaviour of Treeview.
 
+
+##Example callBackOnUpdate
+
+```typescript
+updateData(arrayList: Node[], data: any): Promise<Node> {
+      return new Promise<Node>((resolve, recject) => {
+        setTimeout(() => {
+          data.node.obj = {id: lastIdInsert(arrayList)};
+          resolve(data.node);
+        }, 10);
+      });
+  }
+
+```
 
 Enjoy it
 
