@@ -41,11 +41,18 @@ after this, you can be able to load the LtTreeviewComponent into your own Compon
 ```typescript
 @Component({
   selector : 'app-your-component',
-  template : '<lt-treeview [data] = "listOfElementToShow" [listToAdd]="addedList" [show]="false" [component]="self" [callBackOnUpdate]="UpdateItem" [callBackOnDelete]="DeleteItem"></lt-treeview>',
+  template : 'see below',
   styles : ['']
 })
 
 ```
+
+```html
+<pre>
+  <lt-treeview [data] = "listOfElementToShow" [listToAdd]="addedList" [show]="false" [component]="self" [callBackOnUpdate]="'UpdateItem'" [callBackOnDelete]="DeleteItem"></lt-treeview>
+</pre>
+```
+
 `data` is an array of Element you want to show into the treeview.
 
 `listToAdd` is an array of data that you want to add to your treeview
