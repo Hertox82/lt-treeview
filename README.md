@@ -48,9 +48,9 @@ after this, you can be able to load the LtTreeviewComponent into your own Compon
 ```
 
 ```html
-<pre>
+
   <lt-treeview [data] = "listOfElementToShow" [listToAdd]="addedList" [show]="false" [component]="self" [callBackOnUpdate]="'UpdateItem'" [callBackOnDelete]="DeleteItem"></lt-treeview>
-</pre>
+
 ```
 
 `data` is an array of Element you want to show into the treeview.
