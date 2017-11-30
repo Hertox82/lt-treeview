@@ -100,7 +100,7 @@ updateData(data: any): Promise<Node> {
 
 Enjoy it
 
-[hertox82](https://www.linkedin.com/in/hernan-ariel-de-luca-23842254/)
+[Hernan Ariel De Luca](https://www.linkedin.com/in/hernan-ariel-de-luca-23842254/)
 
 
 
