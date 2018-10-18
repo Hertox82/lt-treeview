@@ -5,6 +5,14 @@
 
 It's a Angular 4 Treeview Component, very easy to use
 
+
+## Version
+
+| version | Angular Supported Version | Angular CLI Supported version |
+| :-------------: |:-------------------------:| :---------: |
+|      ^1.0       |         ^4.2.4            |    1.4.3    |
+|      ^2.0       |         ^5.0.0            |    1.5.4    |
+
 ## Install
 
 In order to install this library type this command on your terminal
