@@ -5,7 +5,6 @@
 
 It's a Angular 4 Treeview Component, very easy to use
 
-
 ## Version
 
 | version | Angular Supported Version | Angular CLI Supported version |
@@ -84,7 +83,6 @@ after this, you can be able to load the LtTreeviewComponent into your own Compon
 
 Into the library you can find a little app that emulate the beahaviour of Treeview.
 
-
 ## Example callBackOnUpdate
 
 ```typescript
@@ -109,7 +107,3 @@ updateData(data: any): Promise<Node> {
 Enjoy it
 
 [Hernan Ariel De Luca](https://www.linkedin.com/in/hernan-ariel-de-luca-23842254/)
-
-
-
-
