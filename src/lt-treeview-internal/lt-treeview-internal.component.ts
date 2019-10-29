@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Node, NodeAdded, convertAddedToNode, ParentChild } from '../lt-treeview/node';
 
 @Component({
@@ -36,10 +36,10 @@ export class LtTreeviewInternalComponent implements OnInit {
       if (this.currentNode == undefined) {
         this.currentNode = item;
         this.currentNode.adding = true;
-      }else if (this.currentNode === item) {
+      } else if (this.currentNode === item) {
         this.currentNode = undefined;
         item.adding = false;
-      }else if (this.currentNode !== item) {
+      } else if (this.currentNode !== item) {
         this.currentNode = item;
         this.currentNode.adding = true;
       }

@@ -3,7 +3,15 @@
 [![npm version](https://badge.fury.io/js/lt-treeview.svg)](https://badge.fury.io/js/lt-treeview)
 [![NPM](https://nodei.co/npm/lt-treeview.png)](https://www.npmjs.com/package/lt-treeview)
 
-It's a Angular 4 Treeview Component, very easy to use
+It's a Angular 4, 5, 6 Treeview Component, very easy to use
+
+## Version
+
+| version | Angular Supported Version | Angular CLI Supported version |
+| :-------------: |:-------------------------:| :---------: |
+|      ^1.x.x     |         ^4.2.4            |    1.4.3    |
+|      ^2.x.x     |         ^5.0.0            |    1.5.4    |
+|      ^3.x.x     |         ^6.0.0            |   ^6.0.0    |
 
 ## Install
 
@@ -76,7 +84,6 @@ after this, you can be able to load the LtTreeviewComponent into your own Compon
 
 Into the library you can find a little app that emulate the beahaviour of Treeview.
 
-
 ## Example callBackOnUpdate
 
 ```typescript
@@ -98,10 +105,6 @@ updateData(data: any): Promise<Node> {
 
 ```
 
-Enjoy it
+Enjoy it 
 
 [Hernan Ariel De Luca](https://www.linkedin.com/in/hernan-ariel-de-luca-23842254/)
-
-
-
-

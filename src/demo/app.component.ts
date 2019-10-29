@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {Node, NodeAdded, ParentChild} from '../lt-treeview';
-import { Subject } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +10,6 @@ export class AppComponent {
   title = 'app';
   lista: Node[];
   addedList: NodeAdded[];
-
-  private _soggetto = new Subject();
-  $mario = this._soggetto.asObservable();
 
   self = this;
   constructor() {
