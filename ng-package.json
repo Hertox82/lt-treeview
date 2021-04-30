@@ -3,5 +3,5 @@
     "lib": {
         "entryFile": "src/public_api.ts"
     },
-    "whitelistedNonPeerDependencies": ["angular","core-js","font-awesome","rxjs","zone.js"]
+    "whitelistedNonPeerDependencies": ["angular","font-awesome","rxjs","zone.js"]
 }
