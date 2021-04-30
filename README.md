@@ -3,7 +3,7 @@
 [![npm version](https://badge.fury.io/js/lt-treeview.svg)](https://badge.fury.io/js/lt-treeview)
 [![NPM](https://nodei.co/npm/lt-treeview.png)](https://www.npmjs.com/package/lt-treeview)
 
-It's a Angular 4, 5, 6, 7 Treeview Component, very easy to use
+It's a Angular 4, 5, 6, 7, 8 Treeview Component, very easy to use
 
 ## Version
 
@@ -13,6 +13,7 @@ It's a Angular 4, 5, 6, 7 Treeview Component, very easy to use
 |      ^2.x.x     |         ^5.0.0            |    1.5.4    |
 |      ^3.x.x     |         ^6.0.0            |   ^6.0.0    |
 |      ^4.x.x     |         ^7.0.0            |   ^7.0.0    |
+|      ^5.x.x     |         ^8.0.0            |   ^8.0.0    |
 
 ## Install
 
