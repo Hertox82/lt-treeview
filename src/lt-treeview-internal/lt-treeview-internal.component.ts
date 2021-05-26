@@ -10,8 +10,8 @@ export class LtTreeviewInternalComponent implements OnInit {
 
   @Input() data: Node[];
   @Input() listToAdd: NodeAdded[] = [];
-  @Input() show: boolean;
-  @Input() parent = <Node>null;
+  @Input() show = false;
+  @Input() parent: Node | {};
 
   @Input() callBackOnUpdate: any;
 
@@ -19,19 +19,22 @@ export class LtTreeviewInternalComponent implements OnInit {
 
   @Input() component: any;
 
-  currentNode: Node;
+  currentNode: Node | undefined;
 
-  constructor() { }
+  constructor() {
+    this.data = [];
+    this.parent = {};
+   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
-  expand(item: Node) {
+  expand(item: Node): void {
     if (item.children.length > 0) {
       item.expand = !item.expand;
     }
   }
 
-  add(item: Node) {
+  add(item: Node): void {
     if (this.show === true) {
       if (this.currentNode == undefined) {
         this.currentNode = item;
@@ -46,7 +49,7 @@ export class LtTreeviewInternalComponent implements OnInit {
     }
   }
 
-  delete(item: Node) {
+  delete(item: Node): void {
     if (this.show === true) {
       if (confirm('Do you really want delete this Node?')) {
         const index = this.data.indexOf(item);
@@ -72,7 +75,7 @@ export class LtTreeviewInternalComponent implements OnInit {
     }
   }
 
-  addNode(item: NodeAdded) {
+  addNode(item: NodeAdded): void {
     this.data.forEach((node) => {
         if (node === this.currentNode) {
           const convertedNode = convertAddedToNode(item);
@@ -86,7 +89,7 @@ export class LtTreeviewInternalComponent implements OnInit {
             } as ParentChild;
             if (this.component == undefined) {
               this.callBackOnUpdate(emitNode).then(
-                (res) => {
+                (res: any) => {
                   node.children.push(res);
                   node.expand = true;
                 }
@@ -96,14 +99,14 @@ export class LtTreeviewInternalComponent implements OnInit {
                   const method = this.callBackOnUpdate.bind(this.component);
 
                   method(emitNode).then(
-                    (res) => {
+                    (res: any) => {
                       node.children.push(res);
                       node.expand = true;
                     }
                   );
                 } else {
                   this.component[this.callBackOnUpdate](node.children, emitNode).then(
-                    (res) => {
+                    (res: any) => {
                       node.children.push(res);
                       node.expand = true;
                     }

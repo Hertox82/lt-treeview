@@ -12,7 +12,7 @@ export class LtTreeviewComponent implements OnInit {
 
   @Input() listToAdd: NodeAdded[] = [];
 
-  @Input() show: boolean;
+  @Input() show = false;
 
   @Input() callBackOnUpdate: any;
 
@@ -20,21 +20,21 @@ export class LtTreeviewComponent implements OnInit {
 
   @Input() component: any;
 
-  currentNode: Node;
+  currentNode: Node | undefined;
   addRootb: boolean;
 
   constructor() {
     this.addRootb = false;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
   /**
    * This function collapse the item in treeview
    * @param item
    */
-  expand(item: Node) {
+  expand(item: Node): void {
     if (item.children.length > 0) {
       item.expand = !item.expand;
     }
@@ -71,20 +71,20 @@ export class LtTreeviewComponent implements OnInit {
     if ( this.callBackOnUpdate != undefined) {
         if (this.component == undefined) {
         this.callBackOnUpdate(this.data, emitNode)
-          .then((res) => {
+          .then((res: any) => {
             this.data.push(res);
           });
       } else {
         if (this.callBackOnUpdate && typeof this.callBackOnUpdate == 'function') {
             const method = this.callBackOnUpdate.bind(this.component);
             method(emitNode).then(
-              (res) => {
+              (res: any) => {
                 this.data.push(res);
               }
             );
         } else {
         this.component[this.callBackOnUpdate](emitNode).then(
-            (res) => {
+            (res: any) => {
               this.data.push(res);
             }
           );
@@ -97,7 +97,7 @@ export class LtTreeviewComponent implements OnInit {
     this.addRootb = !this.addRootb;
   }
 
-  delete(item: Node) {
+  delete(item: Node): void {
     if (this.show === true) {
       if (confirm('Do you really want delete this Node?')) {
         const index = this.data.indexOf(item);
@@ -123,7 +123,7 @@ export class LtTreeviewComponent implements OnInit {
     }
   }
 
-  addNode(item: NodeAdded) {
+  addNode(item: NodeAdded): void {
     this.data.forEach((node) => {
         if (node === this.currentNode) {
           const convertedNode = convertAddedToNode(item);
@@ -137,7 +137,7 @@ export class LtTreeviewComponent implements OnInit {
             } as ParentChild;
             if (this.component == undefined) {
               this.callBackOnUpdate(emitNode).then(
-                (res) => {
+                (res: any) => {
                   node.children.push(res);
                   node.expand = true;
                 }
@@ -147,14 +147,14 @@ export class LtTreeviewComponent implements OnInit {
                   const method = this.callBackOnUpdate.bind(this.component);
 
                   method(emitNode).then(
-                    (res) => {
+                    (res: any) => {
                       node.children.push(res);
                       node.expand = true;
                     }
                   );
                 } else {
                   this.component[this.callBackOnUpdate](node.children, emitNode).then(
-                    (res) => {
+                    (res: any) => {
                       node.children.push(res);
                       node.expand = true;
                     }

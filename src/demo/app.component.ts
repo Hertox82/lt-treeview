@@ -60,7 +60,7 @@ export class AppComponent {
     ];
   }
 
-  change(event) {
+  change(event: any): void {
     console.log(this.lista);
   }
 
@@ -74,7 +74,7 @@ export class AppComponent {
       });
   }
 
-  deleteData(data: any) {
+  deleteData(data: any): void {
     console.log(data);
   }
 }

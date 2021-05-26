@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v 8.0.0 (2021-05-26)
+
+- upgrade to Angular 11
+- End support with 6.x.x and 7.x.x
+
 ## v 7.0.0 (2021-05-14)
 
 - upgrade to Angular 10

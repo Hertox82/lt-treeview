@@ -16,7 +16,7 @@ It's a Angular 4, 5, 6, 7, 8, 9 Treeview Component, very easy to use
 |      ^5.x.x     |         ^8.0.0            |   ^8.0.0    |
 |      ^6.x.x     |         ^9.0.0            |   ^9.0.0    |
 |      ^7.x.x     |         ^10.0.0           |   ^10.0.0   |
-
+|      ^8.x.x     |         ^11.0.0           |   ^11.0.0   |
 
 read the [ChangeLog](CHANGELOG.md)
 
